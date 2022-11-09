@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="cardgame.css" /> 
+    <title>CardGame</title>
+  </head>
+  <script src="cardgame.js"></script>
+  <script>
+    // Func to update our "UI" to reflect game state contained in roundResult
+    function updateState(roundResult) {
+      document.getElementById("message").textContent = roundResult.message;
+      
+      var cardsDiv = document.getElementById("board");
+      cardsDiv.innerHTML = "";
+      for (var i = 0; i < roundResult.count; i++) {
+        var card = roundResult.cards.get(i);
+        var player = roundResult.players.get(i);
+        var score = roundResult.scores.get(i);
+        
+        cardsDiv.innerHTML += '<div class="card"><h4>' + player + ": " + score + "pts" + '</h4><div class="content ' + player.toLowerCase() + '">' + card + "</div></div>";
+      }
+    }
+    
+    // Func to create new game with new deck
+    function resetGame() {
+      var deck = Module.CardCollection.shuffledNumericDeck();
+      window.currentGame = new Module.Game(deck);
+      [ "Red", "Blue" ].forEach(function(name) { 
+        /// ^^^ add here "Green" for one more player
+        window.currentGame.addPlayerWithName(name); 
+      });
+      
+      updateState(window.currentGame.start());
+    }
+    
+    // When WASM loads...
+    Module.onRuntimeInitialized = function() {
+      resetGame();
+      document.getElementById("button").hidden = false;
+      
+      document.getElementById("button").onclick = function() {
+        if (window.currentGame.isFinished()) {
+          var text = "Game finished. " + window.currentGame.gameStatus() + ".";
+          alert(text);
+          resetGame();
+        } else {
+          var roundResult = window.currentGame.playRound();
+          updateState(roundResult);
+        }
+      }      
+    }
+  </script>
+  <body>
+    <h1>Cardgame</h1>
+    <div id="board"></div>
+    <p id="message">Loading game</p>
+    <div id="button" hidden>Next round</div>
+  </body>
+</html>
