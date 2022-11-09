@@ -2,7 +2,7 @@
 
 Simple numeric CardGame implemented in C++/WebAssembly + some Javascript/HTML glue for UI.
 
-The game is meant to be extensible and support a different number of players.
+The game is meant to be extensible: support a different number of players and different types of cards being played (templating).
 
 ![Screenshot](screenshot.png)
 
