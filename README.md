@@ -4,7 +4,7 @@ Simple numeric CardGame implemented in C++/WebAssembly + some Javascript/HTML gl
 
 The game is meant to be extensible and support a different number of players.
 
-[Screenshot](screenshot.png)
+![Screenshot](screenshot.png)
 
 ## Building
 
