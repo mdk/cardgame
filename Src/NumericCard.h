@@ -28,6 +28,7 @@ public:
   }
   
   // Number of numeric 1-N cards in the game.
+  // Used when initialising the deck.
   static constexpr int NumberOfCards = 52;
 };
 

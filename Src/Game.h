@@ -11,7 +11,7 @@
 // The core engine representing a single game in progress, templated by the
 // Card type to use when playing the game. A game is played by creating the object
 // with a freshly shuffled deck of cards, calling `start` to initialise the game,
-// and subsequently calling `playRound` until game is finished `isFInished`.
+// and subsequently calling `playRound` until game is finished `isFinished`.
 
 template <class T>
 class Game {
