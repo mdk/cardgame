@@ -132,8 +132,8 @@ public:
     });
     
     // Find winning max Card returning (Player: Card) combination
-    // This bases on assumption cards have unique values. If not, we could sort according to 
-    // value and compare first 2 (win/draw).
+    // This bases on assumption cards have unique strength values. If not, we 
+    // could sort according to value and compare first 2 (win/draw).
     auto maxIt = std::max_element(begin(cardsDealt), end(cardsDealt), 
                                   [this](const std::pair<Player<T> *, T> a, const std::pair<Player<T> *, T> b) {
       return !(a.second > b.second);
